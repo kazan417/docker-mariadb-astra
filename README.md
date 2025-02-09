@@ -82,6 +82,24 @@ The mariadb has a number of tags, and of note is `latest`, as the latest stable 
 
 ## Running the container
 
+### Running more securely this image
+This repository contains mariadb-swarm.yml file which uses docker secrets to store passwords
+You can run it with command:
+```console
+$ docker stack deploy -c mariadb-swarm.yml
+```
+But before you should create docker swarm cluster with command:
+```console
+$ docker swarm init
+```
+and create 3 secrets (name of secrets in mariadb-swarm.yml) with commands like:
+```console
+$ docker secret create mariadb-root-password ./secretfile1
+$ docker secret create mariadb-repl-password ./secretfile2
+$ docker secret create mariadb-user-password ./secretfile3
+$ rm secretfile1 secretfile2 secretfile3
+```
+
 ### Starting using a minimal configuration
 
 The environment variables required to use this image involves the setting of the root user password:
@@ -130,23 +148,7 @@ services:
 [![Try in PWD](https://github.com/play-with-docker/stacks/raw/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/docker-library/docs/cf3a7fba4dfd134e3f7f5921b580c71e0fd8bc24/mariadb/stack.yml)
 
 Run `docker stack deploy -c stack.yml mariadb` (or `docker-compose -f stack.yml up`), wait for it to initialize completely, and visit `http://swarm-ip:8080`, `http://localhost:8080`, or `http://host-ip:8080` (as appropriate).
-### running more securely this image
-This repository contains mariadb-swarm.yml file which uses docker secrets to store passwords
-You can run it with command:
-```console
-$ docker stack deploy -c mariadb-swarm.yml
-```
-But before you should create docker swarm cluster with command:
-```console
-$ docker swarm init
-```
-and create 3 secrets (name of secrets in mariadb-swarm.yml) with commands like:
-```console
-$ docker secret create mariadb-root-password ./secretfile1
-$ docker secret create mariadb-repl-password ./secretfile2
-$ docker secret create mariadb-user-password ./secretfile3
-$ rm secretfile1 secretfile2 secretfile3
-```
+
 ### Start a `mariadb` server instance with user, password and database
 
 Starting a MariaDB instance with a user, password, and a database:
