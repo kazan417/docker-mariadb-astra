@@ -44,7 +44,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 ENV LANG C.UTF-8
 
 # OCI annotations to image
-LABEL org.opencontainers.image.authors=Kazantsev Mikhail (kazan417@mail.ru)" \
+LABEL org.opencontainers.image.authors="Kazantsev Mikhail (kazan417@mail.ru)" \
       org.opencontainers.image.title="MariaDB Database" \
       org.opencontainers.image.description="MariaDB Database for relational SQL" \
       org.opencontainers.image.documentation="https://hub.docker.com/_/mariadb/" \
