@@ -1,0 +1,41 @@
+#This is file for docker swarm. You can run it with docker stack deploy -c maria-db.yml.
+#Note: you should create docker secrets named mariadb-root-password, mariadb-repl-password, mariadb-user-password.
+# docker secret create mariadb-root-password ./mariadb-root-password;rm mariadb-root-password
+
+#To make running container accessible from other containers uncomment this strings.
+#networks:
+#  mariadb:
+#    driver: overlay
+#    attachable: true
+secrets:
+  mariadb-root-password:
+    external: true
+  mariadb-repl-password:
+    external: true
+  mariadb-user-password:
+    external: true
+services:
+  mariadb-1:
+    secrets:
+      - mariadb-repl-password
+      - mariadb-user-password
+      - mariadb-root-password
+    image: mariadb-server2
+    ports:
+        - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mariadb-root-password
+      MARIADB_REPLICATION_USER: repluser
+      MARIADB_REPLICATION_PASSWORD_FILE: /run/secrets/mariadb-repl-password
+      MARIADB_USER: user
+      MARIADB_PASSWORD_FILE: /run/secrets/mariadb-user-password
+    command:
+      - '--server-id=1'
+      - '--log-bin'
+      - '--log-basename=my-mariadb'
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+    volumes:
+      - ./mariadb:/var/lib/mysql
