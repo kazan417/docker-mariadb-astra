@@ -20,7 +20,7 @@ services:
       - mariadb-repl-password
       - mariadb-user-password
       - mariadb-root-password
-    image: mariadb-server2
+    image: mariadb-server
     ports:
         - 3306:3306
     environment:
