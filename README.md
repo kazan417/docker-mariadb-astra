@@ -83,21 +83,21 @@ The mariadb has a number of tags, and of note is `latest`, as the latest stable 
 ## Running the container
 
 ### Running more securely this image
-This repository contains mariadb-swarm.yml file which uses docker secrets to store passwords
-You can run it with command:
-```console
-$ docker stack deploy -c mariadb-swarm.yml
-```
-But before you should create docker swarm cluster with command:
+First of all you should create docker swarm cluster with command:
 ```console
 $ docker swarm init
 ```
-and create 3 secrets (name of secrets in mariadb-swarm.yml) with commands like:
+and create 3 secrets (name of secrets in mariadb-swarm.yml) with commands like, note that secretfile1 should contain real secret in plain text:
 ```console
 $ docker secret create mariadb-root-password ./secretfile1
 $ docker secret create mariadb-repl-password ./secretfile2
 $ docker secret create mariadb-user-password ./secretfile3
 $ rm secretfile1 secretfile2 secretfile3
+```
+This repository contains mariadb-swarm.yml file which uses docker secrets to store passwords
+You can run it with command:
+```console
+$ docker stack deploy -c mariadb-swarm.yml
 ```
 
 ### Starting using a minimal configuration
