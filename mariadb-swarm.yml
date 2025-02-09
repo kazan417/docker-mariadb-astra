@@ -20,7 +20,7 @@ services:
       - mariadb-repl-password
       - mariadb-user-password
       - mariadb-root-password
-    image: mariadb-server
+    image: ghcr.io/kazan417/docker-mariadb-astra
     ports:
         - 3306:3306
     environment:
