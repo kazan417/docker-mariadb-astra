@@ -1,4 +1,4 @@
-#This is file for docker swarm. You can run it with docker stack deploy -c maria-db.yml.
+#This is file for docker swarm. You can run it with docker stack deploy -c mariadb-swarm.yml.
 #Note: you should create docker secrets named mariadb-root-password, mariadb-repl-password, mariadb-user-password.
 # docker secret create mariadb-root-password ./mariadb-root-password;rm mariadb-root-password
 
